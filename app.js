@@ -22,8 +22,7 @@ function startCamera() {
 
     scanning = true;
     btnScan.disabled = true;
-    btnScan.innerHTML = "📷 Kamera Aktif";
-
+btnScan.innerHTML="📷 Scanner Aktif";
     hasil.className = "info";
     hasil.innerHTML = "📷 Membuka kamera...";
 
