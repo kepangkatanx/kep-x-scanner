@@ -5,7 +5,15 @@ const hasil = document.getElementById("hasil");
 
 let scanner = null;
 let scanning = false;
+function beep() {
 
+    const audio = new Audio(
+        "https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"
+    );
+
+    audio.play();
+
+}
 btnScan.addEventListener("click", startCamera);
 
 function startCamera() {
