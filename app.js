@@ -14,7 +14,7 @@ function beep() {
     audio.play().catch(() => {});
 
 }
-btnScan.addEventListener("click", startCamera);
+btnScan.addEventListener("click", StartCamera);
 
 function startCamera() {
 
@@ -22,9 +22,9 @@ function startCamera() {
 
     scanning = true;
     btnScan.disabled = true;
-btnScan.innerHTML="📷 scanner Aktif";
+btnScan.innerHTML="📷 Scanner Aktif";
     hasil.className = "info";
-    hasil.innerHTML = "📷 Membuka scanner...";
+    hasil.innerHTML = "📷 Membuka Scanner...";
 
     scanner = new Html5Qrcode("reader");
 
@@ -42,7 +42,7 @@ btnScan.innerHTML="📷 scanner Aktif";
 
         scanning = false;
         btnScan.disabled = false;
-        btnScan.innerHTML = "📷 aktifkan scanner";
+        btnScan.innerHTML = "📷 Aktifkan Scanner";
 
         hasil.className = "info error";
         hasil.innerHTML = "❌ " + err;
@@ -70,7 +70,7 @@ function onScanSuccess(decodedText) {
         
 .catch(err => {
 
-    console.error("Gagal menghentikan scanner:", err);
+    console.error("Gagal Menghentikan Scanner:", err);
 
     scanner = null;
     scanning = false;
@@ -82,7 +82,7 @@ function onScanSuccess(decodedText) {
 function prosesAbsensi(id) {
 
     hasil.className = "info";
-    hasil.innerHTML = "⏳ Memproses absensi...";
+    hasil.innerHTML = "⏳ Memproses Absensi...";
 
     fetch(WEBAPP_URL + "?action=absen&id=" + encodeURIComponent(id))
     .then(r => r.json())
@@ -124,7 +124,7 @@ beep();
             document.getElementById("reader").innerHTML = "";
 
             btnScan.disabled = false;
-            btnScan.innerHTML = "📷 scanner aktif";
+            btnScan.innerHTML = "📷 Scanner Aktif";
 
             startCamera();
 
@@ -141,7 +141,7 @@ beep();
         `;
 
         btnScan.disabled=false;
-        btnScan.innerHTML="📷 aktifkan scanner";
+        btnScan.innerHTML="📷 Aktifkan Scanner";
 
     });
 
