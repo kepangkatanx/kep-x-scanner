@@ -1,161 +1,38 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>KEP X Scanner</title>
+<title>KEP Attendance System</title>
+
+<link rel="stylesheet" href="style.css">
 
 <script src="https://unpkg.com/html5-qrcode"></script>
-
-<style>
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f5f5f5;
-    margin:0;
-    padding:20px;
-    text-align:center;
-}
-
-h1{
-    color:#1565C0;
-}
-
-button{
-    padding:15px 30px;
-    font-size:20px;
-    border:none;
-    border-radius:10px;
-    background:#1565C0;
-    color:#fff;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#0D47A1;
-}
-
-#video{
-    width:100%;
-    max-width:420px;
-    margin-top:20px;
-    border-radius:12px;
-    border:3px solid #1565C0;
-}
-
-#hasil{
-    margin-top:20px;
-    padding:15px;
-    background:#fff;
-    border-radius:10px;
-    font-size:20px;
-    font-weight:bold;
-    box-shadow:0 2px 8px rgba(0,0,0,.15);
-}
-
-</style>
 
 </head>
 
 <body>
 
-<h1>KEP X Scanner</h1>
+<div class="container">
 
-<button onclick="startCamera()">
-📷 Aktifkan Kamera
-</button>
+    <h1>KEP X</h1>
+    <h2>Attendance System</h2>
 
-<br><br>
+    <button id="btnScan">
+        📷 Aktifkan Kamera
+    </button>
 
-<div id="reader"></div>
+    <div id="reader"></div>
 
-<div id="hasil">
-Tekan tombol untuk membuka kamera.
+    <div id="hasil" class="info">
+        Tekan tombol untuk membuka kamera.
+    </div>
+
 </div>
 
-<script>
-
-let scanner;
-
-function startCamera(){
-
-    const hasil=document.getElementById("hasil");
-
-    hasil.innerHTML="📷 Membuka kamera...";
-
-    scanner=new Html5Qrcode("reader");
-
-    scanner.start(
-
-        {
-            facingMode:"environment"
-        },
-
-        {
-            fps:10,
-            qrbox:250
-        },
-
-        function(decodedText){
-
-          scanner.stop().then(function () {
-
-    const id = decodedText.trim();
-
-    hasil.innerHTML = "⏳ Memproses absensi...";
-
-    fetch("https://script.google.com/macros/s/AKfycbwvs041UChld2gLXYH48MpTglRPOaBeIA1l9ew_UB2HcOyhjnBa9-iNTO_xdGL_pe-SAA/exec?action=absen&id=" + encodeURIComponent(id))
-    .then(response => response.json())
-    .then(data => {
-
-        if (data.sukses) {
-
-            hasil.innerHTML = `
-                <h2>✅ Absensi Berhasil</h2>
-                <p><b>${data.nama}</b></p>
-                <p>Kelompok ${data.kelompok}</p>
-            `;
-
-        } else {
-
-            hasil.innerHTML = `
-                <h2>⚠️ ${data.pesan}</h2>
-            `;
-
-        }
-
-        setTimeout(function () {
-            document.getElementById("reader").innerHTML = "";
-            startCamera();
-        }, 3000);
-
-    })
-    .catch(error => {
-
-        hasil.innerHTML = `
-            <h2>❌ Terjadi Kesalahan</h2>
-            <p>${error}</p>
-        `;
-
-    });
-
-});  
-        },
-
-        function(error){
-
-        }
-
-    ).catch(function(err){
-
-        hasil.innerHTML="❌ "+err;
-
-    });
-
-}
-
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
