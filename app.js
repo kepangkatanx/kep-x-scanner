@@ -8,12 +8,9 @@ let scanning = false;
 function beep() {
 
     const successSound = new Audio("sounds/success.mp3");
-
 function beep() {
-    successSound.currentTime = 0;
-    successSound.play().catch(() => {});
-}
 
+    const audio = new Audio("sounds/success.mp3");
 
     audio.play().catch(() => {});
 
