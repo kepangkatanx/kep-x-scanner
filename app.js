@@ -7,7 +7,12 @@ let scanner = null;
 let scanning = false;
 function beep() {
 
-    const audio = new Audio("sounds/success.mp3");
+    const successSound = new Audio("sounds/success.mp3");
+
+function beep() {
+    successSound.currentTime = 0;
+    successSound.play().catch(() => {});
+}
 
 
     audio.play().catch(() => {});
