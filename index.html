@@ -2,36 +2,54 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>KEP X Scanner</title>
 
 <style>
 
 body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f5f5;
+    margin:0;
+    padding:20px;
+    text-align:center;
+}
 
-font-family:Arial;
-background:#f5f5f5;
-margin:0;
-padding:30px;
-text-align:center;
-
+h1{
+    color:#1565C0;
 }
 
 button{
+    padding:15px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    background:#1565C0;
+    color:#fff;
+    cursor:pointer;
+}
 
-padding:15px 30px;
-font-size:20px;
-cursor:pointer;
+button:hover{
+    background:#0D47A1;
+}
 
+#video{
+    width:100%;
+    max-width:420px;
+    margin-top:20px;
+    border-radius:12px;
+    border:3px solid #1565C0;
 }
 
 #hasil{
-
-margin-top:30px;
-font-size:24px;
-font-weight:bold;
-
+    margin-top:20px;
+    padding:15px;
+    background:#fff;
+    border-radius:10px;
+    font-size:20px;
+    font-weight:bold;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
 
 </style>
@@ -42,36 +60,51 @@ font-weight:bold;
 
 <h1>KEP X Scanner</h1>
 
-<button onclick="tesAPI()">
-
-Tes API
-
+<button onclick="startCamera()">
+📷 Aktifkan Kamera
 </button>
 
+<br><br>
+
+<video id="video" autoplay playsinline></video>
+
 <div id="hasil">
-
-Belum ada hasil
-
+Tekan tombol untuk membuka kamera.
 </div>
 
 <script>
 
-async function tesAPI(){
+async function startCamera(){
 
-const url="https://script.google.com/macros/s/AKfycbwvs041UChld2gLXYH48MpTglRPOaBeIA1l9ew_UB2HcOyhjnBa9-iNTO_xdGL_pe-SAA/exec?action=cari&id=KEPX001";
+    const hasil=document.getElementById("hasil");
 
-const res=await fetch(url);
+    try{
 
-const data=await res.json();
+        const stream=await navigator.mediaDevices.getUserMedia({
 
-document.getElementById("hasil").innerHTML=
+            video:{
+                facingMode:{
+                    ideal:"environment"
+                }
+            },
 
-JSON.stringify(data,null,2);
+            audio:false
+
+        });
+
+        document.getElementById("video").srcObject=stream;
+
+        hasil.innerHTML="✅ Kamera berhasil diaktifkan.";
+
+    }catch(err){
+
+        hasil.innerHTML="❌ Gagal membuka kamera.<br><br>"+err.message;
+
+    }
 
 }
 
 </script>
 
 </body>
-
 </html>
