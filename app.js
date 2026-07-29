@@ -96,7 +96,7 @@ function prosesAbsensi(id) {
             hasil.innerHTML = `
                 <h2>⚠️</h2>
                 <p>${data.pesan}</p>
-                <p>${jam}</p>
+                <p>🕒 ${jam} WIB</p>
             `;
 
         }
