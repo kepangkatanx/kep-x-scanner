@@ -6,7 +6,7 @@
 
 <title>KEP X Scanner</title>
 
-<script src="https://unpkg.com/@zxing/library@latest"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
 
 <style>
 
@@ -68,7 +68,7 @@ button:hover{
 
 <br><br>
 
-<video id="video" autoplay playsinline></video>
+<div id="reader"></div>
 
 <div id="hasil">
 Tekan tombol untuk membuka kamera.
@@ -76,56 +76,45 @@ Tekan tombol untuk membuka kamera.
 
 <script>
 
-let codeReader;
+let scanner;
 
-async function startCamera(){
+function startCamera(){
 
-    const hasil = document.getElementById("hasil");
-    const video = document.getElementById("video");
+    const hasil=document.getElementById("hasil");
 
-    hasil.innerHTML = "📷 Membuka kamera...";
+    hasil.innerHTML="📷 Membuka kamera...";
 
-    codeReader = new ZXing.BrowserMultiFormatReader();
+    scanner=new Html5Qrcode("reader");
 
-    try{
+    scanner.start(
 
-        const devices = await ZXing.BrowserCodeReader.listVideoInputDevices();
+        {
+            facingMode:"environment"
+        },
 
-        if(devices.length===0){
+        {
+            fps:10,
+            qrbox:250
+        },
 
-            hasil.innerHTML="❌ Kamera tidak ditemukan";
-            return;
+        function(decodedText){
+
+            hasil.innerHTML=
+            "<h2>✅ QR Berhasil Dibaca</h2><br>"+decodedText;
+
+            scanner.stop();
+
+        },
+
+        function(error){
 
         }
 
-        const selectedDeviceId = devices[0].deviceId;
+    ).catch(function(err){
 
-        codeReader.decodeFromVideoDevice(
-            selectedDeviceId,
-            video,
-            (result,err)=>{
+        hasil.innerHTML="❌ "+err;
 
-                if(result){
-
-                    hasil.innerHTML=
-                    "<h2>✅ QR Berhasil Dibaca</h2>"
-                    +"<br>"
-                    +result.text;
-
-                    codeReader.reset();
-
-                }
-
-            }
-        );
-
-    }
-
-    catch(e){
-
-        hasil.innerHTML="❌ "+e;
-
-    }
+    });
 
 }
 
