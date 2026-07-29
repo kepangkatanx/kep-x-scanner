@@ -74,7 +74,7 @@ function prosesAbsensi(id) {
     .then(data => {
 
         if (navigator.vibrate) {
-            navigator.vibrate(200);
+            navigator.vibrate(200); beep();
         }
 
         const jam = new Date().toLocaleTimeString("id-ID");
