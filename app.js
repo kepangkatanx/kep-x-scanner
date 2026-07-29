@@ -11,7 +11,7 @@ function beep() {
         "https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"
     );
 
-    audio.play();
+    audio.play().catch(() => {});
 
 }
 btnScan.addEventListener("click", startCamera);
