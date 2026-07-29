@@ -66,7 +66,7 @@ function onScanSuccess(decodedText) {
     prosesAbsensi(decodedText.trim());
 
 })
-}
+
         
 .catch(err => {
 
@@ -78,7 +78,7 @@ function onScanSuccess(decodedText) {
     prosesAbsensi(decodedText.trim());
 
 });
-
+}
 function prosesAbsensi(id) {
 
     hasil.className = "info";
