@@ -92,7 +92,7 @@ beep();
                 <h2>✅ ABSENSI BERHASIL</h2>
                 <p><strong>${data.nama}</strong></p>
                 <p>Kelompok ${data.kelompok}</p>
-                <p>${jam}</p>
+                <p>🕒 ${jam} WIB</p>
             `;
 
         } else {
