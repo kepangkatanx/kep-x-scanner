@@ -5,9 +5,7 @@ const hasil = document.getElementById("hasil");
 
 let scanner = null;
 let scanning = false;
-function beep() {
 
-    const successSound = new Audio("sounds/success.mp3");
 function beep() {
 
     const audio = new Audio("sounds/success.mp3");
