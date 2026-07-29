@@ -7,9 +7,8 @@ let scanner = null;
 let scanning = false;
 function beep() {
 
-    const audio = new Audio(
-        "https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"
-    );
+    const audio = new Audio("sounds/success.mp3");
+
 
     audio.play().catch(() => {});
 
