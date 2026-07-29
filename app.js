@@ -63,13 +63,7 @@ function onScanSuccess(decodedText) {
 
 });
 
-        scanning = false;
-
-        prosesAbsensi(decodedText.trim());
-
-    });
-
-}
+        }
 
 function prosesAbsensi(id) {
 
