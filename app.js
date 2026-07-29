@@ -22,9 +22,9 @@ function startCamera() {
 
     scanning = true;
     btnScan.disabled = true;
-btnScan.innerHTML="📷 Scanner Aktif";
+btnScan.innerHTML="📷 scanner Aktif";
     hasil.className = "info";
-    hasil.innerHTML = "📷 Membuka kamera...";
+    hasil.innerHTML = "📷 Membuka scanner...";
 
     scanner = new Html5Qrcode("reader");
 
@@ -42,7 +42,7 @@ btnScan.innerHTML="📷 Scanner Aktif";
 
         scanning = false;
         btnScan.disabled = false;
-        btnScan.innerHTML = "📷 Aktifkan Kamera";
+        btnScan.innerHTML = "📷 aktifkan scanner";
 
         hasil.className = "info error";
         hasil.innerHTML = "❌ " + err;
@@ -122,7 +122,7 @@ beep();
             document.getElementById("reader").innerHTML = "";
 
             btnScan.disabled = false;
-            btnScan.innerHTML = "📷 Kamera Aktif";
+            btnScan.innerHTML = "📷 scanner aktif";
 
             startCamera();
 
@@ -139,7 +139,7 @@ beep();
         `;
 
         btnScan.disabled=false;
-        btnScan.innerHTML="📷 Aktifkan Kamera";
+        btnScan.innerHTML="📷 aktifkan scanner";
 
     });
 
