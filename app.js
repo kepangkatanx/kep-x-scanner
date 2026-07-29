@@ -55,18 +55,27 @@ function onScanSuccess(decodedText) {
 
     if (!scanner) return;
 
-    scanner.stop().then(() => {
+    scanner.stop()
+.then(() => {
 
-        scanner.clear().catch(() => {});
-        scanner = null;
+    scanner.clear().catch(() => {});
+    scanner = null;
 
-        scanning = false;
+    scanning = false;
 
-        prosesAbsensi(decodedText.trim());
+    prosesAbsensi(decodedText.trim());
 
-    });
+})
+.catch(err => {
 
-}
+    console.error("Gagal menghentikan scanner:", err);
+
+    scanner = null;
+    scanning = false;
+
+    prosesAbsensi(decodedText.trim());
+
+});
 
 function prosesAbsensi(id) {
 
