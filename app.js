@@ -63,7 +63,7 @@ function onScanSuccess(decodedText) {
 
 });
 
-        }
+}
 
 function prosesAbsensi(id) {
 
