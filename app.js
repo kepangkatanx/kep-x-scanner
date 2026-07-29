@@ -53,7 +53,15 @@ btnScan.innerHTML="📷 Scanner Aktif";
 
 function onScanSuccess(decodedText) {
 
-    scanner.stop().then(() => {
+    scanner.stop().then(()=>{
+
+    scanner.clear().catch(()=>{});
+
+    scanning=false;
+
+    prosesAbsensi(decodedText.trim());
+
+});
 
         scanning = false;
 
