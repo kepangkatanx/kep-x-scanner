@@ -6,6 +6,8 @@
 
 <title>KEP X Scanner</title>
 
+<script src="https://unpkg.com/@zxing/library@latest"></script>
+
 <style>
 
 body{
@@ -74,36 +76,60 @@ Tekan tombol untuk membuka kamera.
 
 <script>
 
+let codeReader;
+
 async function startCamera(){
 
-    const hasil=document.getElementById("hasil");
+    const hasil = document.getElementById("hasil");
+    const video = document.getElementById("video");
+
+    hasil.innerHTML = "📷 Membuka kamera...";
+
+    codeReader = new ZXing.BrowserMultiFormatReader();
 
     try{
 
-        const stream=await navigator.mediaDevices.getUserMedia({
+        const devices = await ZXing.BrowserCodeReader.listVideoInputDevices();
 
-            video:{
-                facingMode:{
-                    ideal:"environment"
+        if(devices.length===0){
+
+            hasil.innerHTML="❌ Kamera tidak ditemukan";
+            return;
+
+        }
+
+        const selectedDeviceId = devices[0].deviceId;
+
+        codeReader.decodeFromVideoDevice(
+            selectedDeviceId,
+            video,
+            (result,err)=>{
+
+                if(result){
+
+                    hasil.innerHTML=
+                    "<h2>✅ QR Berhasil Dibaca</h2>"
+                    +"<br>"
+                    +result.text;
+
+                    codeReader.reset();
+
                 }
-            },
 
-            audio:false
+            }
+        );
 
-        });
+    }
 
-        document.getElementById("video").srcObject=stream;
+    catch(e){
 
-        hasil.innerHTML="✅ Kamera berhasil diaktifkan.";
-
-    }catch(err){
-
-        hasil.innerHTML="❌ Gagal membuka kamera.<br><br>"+err.message;
+        hasil.innerHTML="❌ "+e;
 
     }
 
 }
 
+</script>
 </script>
 
 </body>
