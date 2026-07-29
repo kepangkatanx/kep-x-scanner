@@ -55,7 +55,8 @@ function onScanSuccess(decodedText) {
 
     scanner.stop().then(()=>{
 
-    scanner.clear().catch(()=>{});
+    scanner.clear().catch(() => {});
+scanner = null;
 
     scanning=false;
 
