@@ -14,7 +14,7 @@ function beep() {
     audio.play().catch(() => {});
 
 }
-btnScan.addEventListener("click", StartCamera);
+btnScan.addEventListener("click", startCamera);
 
 function startCamera() {
 
