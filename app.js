@@ -77,7 +77,15 @@ function prosesAbsensi(id) {
         if (navigator.vibrate) {
             navigator.vibrate(200);
         }
-beep();
+function beep() {
+
+    const audio = new Audio(
+        "https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"
+    );
+
+    audio.play().catch(() => {});
+
+}
         const jam = new Date().toLocaleTimeString("id-ID");
 
         if (data.sukses) {
