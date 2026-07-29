@@ -123,7 +123,6 @@ beep();
             document.getElementById("reader").innerHTML = "";
 
             btnScan.disabled = false;
-            btnScan.innerHTML = "📷 Scanner Aktif";
 
             startCamera();
 
