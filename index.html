@@ -99,11 +99,48 @@ function startCamera(){
 
         function(decodedText){
 
-            hasil.innerHTML=
-            "<h2>✅ QR Berhasil Dibaca</h2><br>"+decodedText;
+          scanner.stop().then(function () {
 
-            scanner.stop();
+    const id = decodedText.trim();
 
+    hasil.innerHTML = "⏳ Memproses absensi...";
+
+    fetch("https://script.google.com/macros/s/AKfycbwvs041UChld2gLXYH48MpTglRPOaBeIA1l9ew_UB2HcOyhjnBa9-iNTO_xdGL_pe-SAA/exec?action=absen&id=" + encodeURIComponent(id))
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.sukses) {
+
+            hasil.innerHTML = `
+                <h2>✅ Absensi Berhasil</h2>
+                <p><b>${data.nama}</b></p>
+                <p>Kelompok ${data.kelompok}</p>
+            `;
+
+        } else {
+
+            hasil.innerHTML = `
+                <h2>⚠️ ${data.pesan}</h2>
+            `;
+
+        }
+
+        setTimeout(function () {
+            document.getElementById("reader").innerHTML = "";
+            startCamera();
+        }, 3000);
+
+    })
+    .catch(error => {
+
+        hasil.innerHTML = `
+            <h2>❌ Terjadi Kesalahan</h2>
+            <p>${error}</p>
+        `;
+
+    });
+
+});  
         },
 
         function(error){
