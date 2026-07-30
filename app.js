@@ -6,6 +6,10 @@ const hasil = document.getElementById("hasil");
 let scanner = null;
 let scanning = false;
 
+let lastScannedId = "";
+let lastScanTime = 0;
+const SCAN_DELAY = 5000; // 5 detik
+
 function beep() {
 
     const audio = new Audio("sounds/success.mp3");
@@ -51,6 +55,15 @@ btnScan.innerHTML="📷 Scanner Aktif";
 }
 
 function onScanSuccess(decodedText) {
+    const now = Date.now();
+
+if (decodedText.trim() === lastScannedId &&
+    (now - lastScanTime) < SCAN_DELAY) {
+    return;
+}
+
+lastScannedId = decodedText.trim();
+lastScanTime = now;
 
     if (!scanner) return;
 
