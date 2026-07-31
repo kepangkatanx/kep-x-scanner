@@ -59,18 +59,8 @@ function startCamera() {
 }
 
 function onScanSuccess(decodedText) {
-    const now = Date.now();
-
-if (decodedText.trim() === lastScannedId &&
-    (now - lastScanTime) < SCAN_DELAY) {
-    return;
-}
-
-lastScannedId = decodedText.trim();
-lastScanTime = now;
 
     const now = Date.now();
-
     decodedText = decodedText.trim();
 
     if (
@@ -90,6 +80,7 @@ lastScanTime = now;
     prosesAbsensi(decodedText);
 
 }
+
 function prosesAbsensi(id) {
 
     hasil.className = "info";
