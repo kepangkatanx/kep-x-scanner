@@ -11,21 +11,21 @@ let lastScanTime = 0;
 const SCAN_DELAY = 5000; // 5 detik
 
 function beep() {
-
     const audio = new Audio("sounds/success.mp3");
-
     audio.play().catch(() => {});
-
 }
+
 btnScan.addEventListener("click", startCamera);
 
 function startCamera() {
 
-    if (scanning) return;
+    if (scanner) {
+        return;
+    }
 
-    scanning = true;
     btnScan.disabled = true;
-btnScan.innerHTML="📷 Scanner Aktif";
+    btnScan.innerHTML = "📷 Scanner Aktif";
+
     hasil.className = "info";
     hasil.innerHTML = "📷 Membuka Scanner...";
 
@@ -34,16 +34,20 @@ btnScan.innerHTML="📷 Scanner Aktif";
     scanner.start(
         { facingMode: "environment" },
         {
-            fps: 10,
-            qrbox: 250
+            fps: 20,
+            qrbox: 200
         },
         onScanSuccess,
-        function () {
-            // abaikan error pembacaan per frame
-        }
-    ).catch(err => {
-
+        () => {}
+    )
+    .then(() => {
         scanning = false;
+    })
+    .catch(err => {
+
+        scanner = null;
+        scanning = false;
+
         btnScan.disabled = false;
         btnScan.innerHTML = "📷 Aktifkan Scanner";
 
@@ -65,31 +69,26 @@ if (decodedText.trim() === lastScannedId &&
 lastScannedId = decodedText.trim();
 lastScanTime = now;
 
-    if (!scanner) return;
+    const now = Date.now();
 
-    scanner.stop()
-.then(() => {
+    decodedText = decodedText.trim();
 
-    scanner.clear().catch(() => {});
-    scanner = null;
+    if (
+        decodedText === lastScannedId &&
+        (now - lastScanTime) < SCAN_DELAY
+    ) {
+        return;
+    }
 
-    scanning = false;
+    if (scanning) return;
 
-    prosesAbsensi(decodedText.trim());
+    scanning = true;
 
-})
+    lastScannedId = decodedText;
+    lastScanTime = now;
 
-        
-.catch(err => {
+    prosesAbsensi(decodedText);
 
-    console.error("Gagal Menghentikan Scanner:", err);
-
-    scanner = null;
-    scanning = false;
-
-    prosesAbsensi(decodedText.trim());
-
-});
 }
 function prosesAbsensi(id) {
 
@@ -97,63 +96,56 @@ function prosesAbsensi(id) {
     hasil.innerHTML = "⏳ Memproses Absensi...";
 
     fetch(WEBAPP_URL + "?action=absen&id=" + encodeURIComponent(id))
-    .then(r => r.json())
-    .then(data => {
+        .then(r => r.json())
+        .then(data => {
 
-        if (navigator.vibrate) {
-            navigator.vibrate(200);
-        }
-       
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
 
-beep();
-        const jam = new Date().toLocaleTimeString("id-ID");
+            beep();
 
-        if (data.sukses) {
+            const jam = new Date().toLocaleTimeString("id-ID");
 
-            hasil.className = "info success";
+            if (data.sukses) {
+
+                hasil.className = "info success";
+
+                hasil.innerHTML = `
+                    <h2>✅ ABSENSI BERHASIL</h2>
+                    <p><strong>${data.nama}</strong></p>
+                    <p>Kelompok ${data.kelompok}</p>
+                    <p>🕒 ${jam} WIB</p>
+                `;
+
+            } else {
+
+                hasil.className = "info warning";
+
+                hasil.innerHTML = `
+                    <h2>⚠️</h2>
+                    <p>${data.pesan}</p>
+                    <p>🕒 ${jam} WIB</p>
+                `;
+
+            }
+
+            setTimeout(() => {
+                scanning = false;
+            }, 1000);
+
+        })
+        .catch(err => {
+
+            hasil.className = "info error";
 
             hasil.innerHTML = `
-                <h2>✅ ABSENSI BERHASIL</h2>
-                <p><strong>${data.nama}</strong></p>
-                <p>Kelompok ${data.kelompok}</p>
-                <p>🕒 ${jam} WIB</p>
+                <h2>❌ Terjadi Kesalahan</h2>
+                <p>${err}</p>
             `;
 
-        } else {
+            scanning = false;
 
-            hasil.className = "info warning";
-
-            hasil.innerHTML = `
-                <h2>⚠️</h2>
-                <p>${data.pesan}</p>
-                <p>🕒 ${jam} WIB</p>
-            `;
-
-        }
-
-        setTimeout(() => {
-
-            document.getElementById("reader").innerHTML = "";
-
-            btnScan.disabled = false;
-
-            startCamera();
-
-        },3000);
-
-    })
-    .catch(err=>{
-
-        hasil.className="info error";
-
-        hasil.innerHTML=`
-            <h2>❌ Terjadi Kesalahan</h2>
-            <p>${err}</p>
-        `;
-
-        btnScan.disabled=false;
-        btnScan.innerHTML="📷 Aktifkan Scanner";
-
-    });
+        });
 
 }

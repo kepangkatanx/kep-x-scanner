@@ -87,7 +87,9 @@ button:hover{
     font-size:20px;
 
 }
-
+.info:empty {
+    display: none;
+}
 .success{
 
     background:#E8F5E9;
