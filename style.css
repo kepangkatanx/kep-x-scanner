@@ -1,13 +1,13 @@
 body{
     margin:0;
-    background:lime !important;
+    background:#000 !important;
     font-family:Arial, Helvetica, sans-serif;
 }
 
 .container{
     max-width:420px;
     margin:40px auto;
-    background:#1e1e1e;
+    background:#000;
     color:#fff;
     padding:30px;
     border-radius:20px;
@@ -17,7 +17,7 @@ body{
 
 /* Logo */
 .logo{
-    width:180px;
+    width:500px;
     max-width:45vw;
     height:auto;
     object-fit:contain;
@@ -92,24 +92,6 @@ button:disabled{
 
 .info:empty{
     display:none;
-<<<<<<< HEAD
-}
-
-.success{
-    background:#E8F5E9;
-    border-left:8px solid #2E7D32;
-}
-
-.warning{
-    background:#FFF8E1;
-    border-left:8px solid #F9A825;
-}
-
-.error{
-    background:#FFEBEE;
-    border-left:8px solid #C62828;
-=======
->>>>>>> 871bc87 (update scanner)
 }
 
 .success{
@@ -126,3 +108,4 @@ button:disabled{
     background:#FFEBEE;
     border-left:8px solid #C62828;
 }
+
