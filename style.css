@@ -17,8 +17,8 @@ body{
 
 /* Logo */
 .logo{
-    width:500px;
-    max-width:45vw;
+    width:600px;
+    max: width 100%;
     height:auto;
     object-fit:contain;
     display:block;
