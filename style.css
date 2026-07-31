@@ -92,6 +92,24 @@ button:disabled{
 
 .info:empty{
     display:none;
+<<<<<<< HEAD
+}
+
+.success{
+    background:#E8F5E9;
+    border-left:8px solid #2E7D32;
+}
+
+.warning{
+    background:#FFF8E1;
+    border-left:8px solid #F9A825;
+}
+
+.error{
+    background:#FFEBEE;
+    border-left:8px solid #C62828;
+=======
+>>>>>>> 871bc87 (update scanner)
 }
 
 .success{
