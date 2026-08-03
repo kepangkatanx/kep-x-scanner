@@ -97,15 +97,18 @@ button:disabled{
 .success{
     background:#E8F5E9;
     border-left:8px solid #2E7D32;
+    color:#000;
 }
 
 .warning{
     background:#FFF8E1;
     border-left:8px solid #F9A825;
+    color:#000;
 }
 
 .error{
     background:#FFEBEE;
     border-left:8px solid #C62828;
+    color:#000
 }
 
