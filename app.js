@@ -11,6 +11,11 @@ let lastScanTime = 0;
 
 const SCAN_DELAY = 5000;
 
+function beep() {
+    const audio = new Audio("sounds/success.mp3");
+    audio.play().catch(() => {});
+}
+
 window.addEventListener("DOMContentLoaded", () => {
 
     btnScan = document.getElementById("btnScan");
