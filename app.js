@@ -103,10 +103,22 @@ function prosesAbsensi(id) {
                 hasil.className = "info success";
 
                 hasil.innerHTML = `
-                <div style="color:red;font-size:40px;">
-                TEST
-                </div>
-`                ;
+                    <div class="scan-title">
+                        ✅ ABSENSI BERHASIL
+                    </div>
+
+                    <div class="scan-name">
+                        ${data.nama}
+                    </div>
+
+                    <div class="scan-group">
+                        Kelompok <strong>${data.kelompok}</strong>
+                    </div>
+
+                    <div class="scan-time">
+                        🕒 ${jam} WIB
+                    </div>
+            `    ;
 
             } else {
 
