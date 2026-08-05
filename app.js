@@ -149,7 +149,14 @@ function prosesAbsensi(id) {
 
             } else {
 
+                if (navigator.vibrate) {
+                    navigator.vibrate(200);
+                }
+
+                beep();
+
                 hasil.className = "info warning";
+               
 
                 hasil.innerHTML = `
                 <div class="scan-title">
