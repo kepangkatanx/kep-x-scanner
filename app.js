@@ -118,7 +118,7 @@ function prosesAbsensi(id) {
                     <div class="scan-time">
                         🕒 ${jam} WIB
                     </div>
-`;
+`
                 `;
 
             } else {
