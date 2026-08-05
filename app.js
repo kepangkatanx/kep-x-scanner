@@ -19,6 +19,8 @@ btnScan.addEventListener("click", startCamera);
 
 function startCamera() {
 
+    alert("Tombol diklik");
+    
     if (scanner) {
         return;
     }
