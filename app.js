@@ -97,11 +97,19 @@ function onScanSuccess(decodedText) {
 
 function prosesAbsensi(id) {
 
-    hasil.className = "info";
+   hasil.className = "info";
 
     hasil.innerHTML = `
         <div class="scan-title">
-            ⏳ Memproses Absensi...
+            ⏳
+        </div>
+
+        <div class="scan-name" style="font-size:24px;">
+            Memproses Absensi...
+        </div>
+
+        <div class="scan-time">
+            Mohon tunggu sebentar...
         </div>
     `;
 
