@@ -1,21 +1,24 @@
 const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwvs041UChld2gLXYH48MpTglRPOaBeIA1l9ew_UB2HcOyhjnBa9-iNTO_xdGL_pe-SAA/exec";
 
-const btnScan = document.getElementById("btnScan");
-const hasil = document.getElementById("hasil");
+let btnScan;
+let hasil;
 
 let scanner = null;
 let scanning = false;
 
 let lastScannedId = "";
 let lastScanTime = 0;
-const SCAN_DELAY = 5000; // 5 detik
 
-function beep() {
-    const audio = new Audio("sounds/success.mp3");
-    audio.play().catch(() => {});
-}
+const SCAN_DELAY = 5000;
 
-btnScan.addEventListener("click", startCamera);
+window.addEventListener("DOMContentLoaded", () => {
+
+    btnScan = document.getElementById("btnScan");
+    hasil = document.getElementById("hasil");
+
+    btnScan.addEventListener("click", startCamera);
+
+});
 
 function startCamera() {
     
