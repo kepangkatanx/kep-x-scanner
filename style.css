@@ -113,27 +113,27 @@ button:disabled{
 }
 
 .scan-title{
-    color:#000;
     font-size:24px;
     font-weight:bold;
-    margin-bottom:12px;
+    color:#000;
+    margin-bottom:15px;
 }
 
 .scan-name{
-    color:#000;
     font-size:34px;
     font-weight:bold;
-    margin:15px 0;
+    color:#000;
     line-height:1.2;
+    margin-bottom:15px;
 }
 
 .scan-group{
-    color:#333;
     font-size:22px;
+    color:#333;
     margin-bottom:10px;
 }
 
 .scan-time{
-    color:#666;
     font-size:18px;
+    color:#666;
 }
