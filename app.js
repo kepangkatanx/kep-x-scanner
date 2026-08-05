@@ -98,7 +98,12 @@ function onScanSuccess(decodedText) {
 function prosesAbsensi(id) {
 
     hasil.className = "info";
-    hasil.innerHTML = "⏳ Memproses Absensi...";
+
+    hasil.innerHTML = `
+        <div class="scan-title">
+            ⏳ Memproses Absensi...
+        </div>
+    `;
 
     fetch(WEBAPP_URL + "?action=absen&id=" + encodeURIComponent(id))
         .then(r => r.json())
