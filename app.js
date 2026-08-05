@@ -152,9 +152,17 @@ function prosesAbsensi(id) {
                 hasil.className = "info warning";
 
                 hasil.innerHTML = `
-                    <h2>⚠️</h2>
-                    <p>${data.pesan}</p>
-                    <p>🕒 ${jam} WIB</p>
+                <div class="scan-title">
+                    ⚠️ SUDAH ABSEN
+                </div>
+
+                <div class="scan-name" style="font-size:24px;">
+                    ${data.pesan}
+                </div>
+
+                <div class="scan-time">
+                    🕒 ${jam} WIB
+                </div>
                 `;
 
             }
@@ -169,13 +177,13 @@ function prosesAbsensi(id) {
             hasil.className = "info error";
 
             hasil.innerHTML = `
-                <div class="scan-title">
-                    ❌ TERJADI KESALAHAN
-                </div>
+            <div class="scan-title">
+                ❌ TERJADI KESALAHAN
+            </div>
 
-                <div class="scan-name" style="font-size:22px;">
-                    ${err}
-                </div>
+            <div class="scan-name" style="font-size:22px;">
+                ${err}
+            </div>
             `;
             scanning = false;
 
