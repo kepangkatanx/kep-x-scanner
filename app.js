@@ -108,12 +108,12 @@ function prosesAbsensi(id) {
                 navigator.vibrate(200);
             }
 
-            beep();
-
             const jam = new Date().toLocaleTimeString("id-ID");
 
             if (data.sukses) {
 
+                beep();
+                
                 hasil.className = "info success";
 
                 hasil.innerHTML = `
