@@ -169,10 +169,14 @@ function prosesAbsensi(id) {
             hasil.className = "info error";
 
             hasil.innerHTML = `
-                <h2>❌ Terjadi Kesalahan</h2>
-                <p>${err}</p>
-            `;
+                <div class="scan-title">
+                    ❌ TERJADI KESALAHAN
+                </div>
 
+                <div class="scan-name" style="font-size:22px;">
+                    ${err}
+                </div>
+            `;
             scanning = false;
 
         });
