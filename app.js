@@ -11,28 +11,15 @@ let lastScanTime = 0;
 
 const SCAN_DELAY = 5000;
 
+const successSound = new Audio("sounds/success.mp3");
+successSound.volume = 0.7;
+
+
 function beep() {
-
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
-
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
-
-    oscillator.type = "sine";
-    oscillator.frequency.value = 1000; // nada
-
-    gainNode.gain.value = 0.2; // volume
-
-    oscillator.start();
-
-    setTimeout(() => {
-        oscillator.stop();
-        ctx.close();
-    }, 120);
-
+    successSound.currentTime = 0;
+    successSound.play().catch(err => {
+        console.log("Gagal memutar audio:", err);
+    });
 }
 
 window.addEventListener("DOMContentLoaded", () => {
