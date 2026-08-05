@@ -41,7 +41,16 @@ function startCamera() {
     btnScan.innerHTML = "📷 Scanner Aktif";
 
     hasil.className = "info";
-    hasil.innerHTML = "📷 Membuka Scanner...";
+
+    hasil.innerHTML = `
+        <div class="scan-title">
+            📷 Membuka Scanner...
+        </div>
+
+        <div class="scan-time">
+            Mohon tunggu sebentar...
+        </div>
+    `;
 
     scanner = new Html5Qrcode("reader");
 
@@ -65,8 +74,17 @@ function startCamera() {
         btnScan.disabled = false;
         btnScan.innerHTML = "📷 Aktifkan Scanner";
 
-        hasil.className = "info error";
-        hasil.innerHTML = "❌ " + err;
+    hasil.className = "info error";
+
+    hasil.innerHTML = `
+        <div class="scan-title">
+            ❌ TERJADI KESALAHAN
+        </div>
+
+        <div class="scan-name" style="font-size:20px;">
+            ${err}
+        </div>
+    `;
 
     });
 
