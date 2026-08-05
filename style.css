@@ -113,10 +113,9 @@ button:disabled{
 }
 
 .scan-title{
-    color:#000;
+    color:red !important;
     font-size:24px;
     font-weight:bold;
-    margin-bottom:10px;
 }
 
 .scan-name{
