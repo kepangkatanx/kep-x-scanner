@@ -12,8 +12,27 @@ let lastScanTime = 0;
 const SCAN_DELAY = 5000;
 
 function beep() {
-    const audio = new Audio("sounds/success.mp3");
-    audio.play().catch(() => {});
+
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = 1000; // nada
+
+    gainNode.gain.value = 0.2; // volume
+
+    oscillator.start();
+
+    setTimeout(() => {
+        oscillator.stop();
+        ctx.close();
+    }, 120);
+
 }
 
 window.addEventListener("DOMContentLoaded", () => {
