@@ -148,23 +148,26 @@ function prosesAbsensi(id) {
                 hasil.className = "info success";
 
                 hasil.innerHTML = `
-                    <div class="scan-title">
-                        ✅ ABSENSI BERHASIL
-                    </div>
+<div class="scan-title">
+    ✅ ABSENSI BERHASIL
+</div>
 
-                    <div class="scan-name">
-                        ${data.nama}
-                    </div>
+<div class="scan-name">
+    ${data.nama}
+</div>
 
-                    <div class="scan-group">
-                        Kelompok <strong>${data.kelompok}</strong>
-                    </div>
+<div class="scan-group">
+    ${data.paroki}
+</div>
 
-                    <div class="scan-time">
-                        🕒 ${jam} WIB
-                    </div>
-            `    ;
+<div class="scan-group">
+    Kelompok <strong>${data.kelompok}</strong>
+</div>
 
+<div class="scan-time">
+    🕒 ${jam} WIB
+</div>
+`;
             } else {
 
                 if (navigator.vibrate) {
