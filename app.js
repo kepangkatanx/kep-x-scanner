@@ -157,12 +157,13 @@ function prosesAbsensi(id) {
         ${data.nama}
     </div>
 
-    <div class="scan-time">
-        <strong>Paroki :</strong> ${data.paroki}<br>
-        <strong>Kelompok :</strong> ${data.kelompok}<br><br>
-        🕒 ${jam} WIB
-    </div>
-`;
+    <div class="scan-time" style="text-align:left;">
+    Paroki ${data.paroki}<br>
+    Kelompok ${data.kelompok}<br><br>
+    🕒 ${jam} WIB
+</div>
+   
+    `;
                 
             } else {
 
