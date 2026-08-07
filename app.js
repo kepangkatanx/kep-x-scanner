@@ -115,84 +115,74 @@ function onScanSuccess(decodedText) {
 
 function prosesAbsensi(id) {
 
-   hasil.className = "info";
-
+    hasil.className = "info";
     hasil.innerHTML = `
-        <div class="scan-title">
-            ⏳
-        </div>
-
-        <div class="scan-name" style="font-size:24px;">
-            Memproses Absensi...
-        </div>
-
-        <div class="scan-time">
-            Mohon tunggu sebentar...
-        </div>
+        <div class="scan-title">⏳</div>
+        <div class="scan-name">Memproses Absensi...</div>
+        <div class="scan-time">Mohon tunggu sebentar...</div>
     `;
 
     fetch(WEBAPP_URL + "?action=absen&id=" + encodeURIComponent(id))
-        .then(r => r.json())
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+
+            return response.json();
+
+        })
         .then(data => {
+
+            const jam = new Date().toLocaleTimeString("id-ID", {
+                hour12: false
+            });
 
             if (navigator.vibrate) {
                 navigator.vibrate(200);
             }
 
-            const jam = new Date().toLocaleTimeString("id-ID");
-
             if (data.sukses) {
 
                 beep();
-                
+
                 hasil.className = "info success";
 
                 hasil.innerHTML = `
-<div class="scan-title">
-    ✅ ABSENSI BERHASIL
-</div>
+                    <div class="scan-title">
+                        ✅ ABSENSI BERHASIL
+                    </div>
 
-<div class="scan-name">
-    ${data.nama}
-</div>
+                    <div class="scan-name">
+                        ${data.nama}
+                    </div>
 
-<div class="scan-group">
-    ${data.paroki}
-</div>
+                    <div class="scan-time">
+                        Paroki : <strong>${data.paroki}</strong><br>
+                        Kelompok : <strong>${data.kelompok}</strong><br>
+                        🕒 ${jam} WIB
+                    </div>
+                `;
 
-<div class="scan-group">
-    Kelompok <strong>${data.kelompok}</strong>
-</div>
-
-<div class="scan-time">
-    🕒 ${jam} WIB
-</div>
-`;
             } else {
-
-                if (navigator.vibrate) {
-                    navigator.vibrate(200);
-                }
 
                 beep();
 
                 hasil.className = "info warning";
-               
 
                 hasil.innerHTML = `
-                <div class="scan-title">
-                    ⚠️ SUDAH ABSEN
-                </div>
+                    <div class="scan-title">
+                        ⚠️ SUDAH ABSEN
+                    </div>
 
-                <div class="scan-name" style="font-size:24px;">
-                    ${data.pesan}
-                </div>
+                    <div class="scan-name">
+                        ${data.pesan}
+                    </div>
 
-                <div class="scan-time">
-                    🕒 ${jam} WIB
-                </div>
+                    <div class="scan-time">
+                        🕒 ${jam} WIB
+                    </div>
                 `;
-
             }
 
             setTimeout(() => {
@@ -202,17 +192,20 @@ function prosesAbsensi(id) {
         })
         .catch(err => {
 
+            console.error(err);
+
             hasil.className = "info error";
 
             hasil.innerHTML = `
-            <div class="scan-title">
-                ❌ TERJADI KESALAHAN
-            </div>
+                <div class="scan-title">
+                    ❌ TERJADI KESALAHAN
+                </div>
 
-            <div class="scan-name" style="font-size:22px;">
-                ${err}
-            </div>
+                <div class="scan-name">
+                    ${err.message}
+                </div>
             `;
+
             scanning = false;
 
         });
